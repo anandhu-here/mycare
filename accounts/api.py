@@ -29,6 +29,9 @@ class RegisterAPI(generics.GenericAPIView):
         user = serializer.save()
         profile = HomeProfile.objects.get(home=user)
         profile.name = data['home_name']
+        profile.phone = data['phone']
+        profile.address = data['address']
+        profile.postcode = data['postcode']
         profile.save()
           
           
@@ -38,6 +41,8 @@ class RegisterAPI(generics.GenericAPIView):
         carer = Profile.objects.get(user = user)
         carer.first_name = data['first_name']
         carer.last_name = data['last_name']
+        carer.dob = data['dob']
+        carer.phone = data['phone']
         carer.save()
       return Response({
         "user": UserSerializer(user, context=self.get_serializer_context()).data,
