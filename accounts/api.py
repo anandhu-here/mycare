@@ -1,13 +1,13 @@
-from backend.shift.models import ShiftName
+
 from rest_framework import generics, permissions, views, viewsets
 from rest_framework.response import Response
 from knox.models import AuthToken
 from rest_framework.parsers import MultiPartParser, FormParser
-from .serializer import HomeProfileSerializer, ProfileSerializer, UserSerializer, RegisterSerializer, LoginSerializer, DocsSerializer, TimesheetSerializer
-import random
+from .serializer import  UserSerializer, RegisterSerializer, LoginSerializer
+
 from rest_framework import parsers
 from  rest_framework.permissions import IsAuthenticated
-from .models import AgentProfile, HomeProfile, Profile, User, Docs, Timesheets
+from .models import CarerProfile, HomeProfile, User
 from rest_framework.decorators import api_view, permission_classes
 
 class RegisterAPI(generics.GenericAPIView):
@@ -38,7 +38,7 @@ class RegisterAPI(generics.GenericAPIView):
     
       
       if type == 'CARER':
-        carer = Profile.objects.get(user = user)
+        carer = CarerProfile.objects.get(user = user)
         carer.first_name = data['first_name']
         carer.last_name = data['last_name']
         carer.dob = data['dob']
