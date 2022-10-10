@@ -38,6 +38,7 @@ class RegisterAPI(generics.GenericAPIView):
     
       
       if type == 'CARER':
+        user = serializer.save()
         carer = CarerProfile.objects.get(user = user)
         carer.first_name = data['first_name']
         carer.last_name = data['last_name']
