@@ -109,7 +109,10 @@ class CarerProfile(models.Model):
     phone = models.CharField(max_length = 13 , blank=True, null=True)
     timestamp = models.DateField(auto_now_add=True)
     def __str__(self):
-        return self.first_name
+        if self.first_name:
+            return self.first_name
+        else:
+            return self.id
 
 
 
