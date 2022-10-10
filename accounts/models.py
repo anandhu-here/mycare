@@ -112,7 +112,7 @@ class CarerProfile(models.Model):
         if self.first_name:
             return self.first_name
         else:
-            return self.id
+            return str(self.id)
 
 
 
