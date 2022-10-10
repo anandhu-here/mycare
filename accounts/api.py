@@ -23,6 +23,7 @@ class RegisterAPI(generics.GenericAPIView):
       "password":password,
       "push_token":push_token
     }, context={'type':data['type']})
+    print(serializer.is_valid(), "0-00000")
     if serializer.is_valid(raise_exception=True):
 
       if type == "HOME":
