@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import User, HomeProfile
+from .models import CarerProfile, User, HomeProfile
 from django.contrib.auth import authenticate
 
 class UserSerializer(serializers.ModelSerializer):
@@ -51,3 +51,15 @@ class LoginSerializer(serializers.Serializer):
     if user and user.is_active:
       return user
     raise serializers.ValidationError("Incorrect Credentials")
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = CarerProfile
+    fields = '__all__'
+
+
+class HomeProfileSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = HomeProfile
+    fields = "__all__"

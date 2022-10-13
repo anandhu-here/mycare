@@ -100,6 +100,11 @@ class User(AbstractBaseUser):
         return self.staff
 
 
+def imageUpload(self, filename):
+    return f'images/profile/{self.user.email}/{filename}'
+def fileUPload(self, filename):
+    return f'files/{self.profile.first_name} - {self.profile.id}/{filename}'   
+
 
 class CarerProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -107,6 +112,7 @@ class CarerProfile(models.Model):
     last_name = models.CharField(max_length=100, blank=True, null=True)
     dob = models.CharField(max_length=10,blank=True, null=True )
     phone = models.CharField(max_length = 13 , blank=True, null=True)
+    dp = models.ImageField(imageUpload, blank=True, null = True)
     timestamp = models.DateField(auto_now_add=True)
     def __str__(self):
         if self.first_name:
