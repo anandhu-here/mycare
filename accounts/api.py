@@ -72,6 +72,7 @@ class LoginAPI(generics.GenericAPIView):
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def UserAPI(request, *args, **kwargs):
+  
   user = request.user
   serializer = UserSerializer(user)
   _, token = AuthToken.objects.create(user)

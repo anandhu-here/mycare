@@ -15,12 +15,12 @@ class UserSerializer(serializers.ModelSerializer):
     else:
       return "CARER"
   def get_profile(self, obj):
-    # if(obj.home):
-    #   profile = HomeProfile.objects.get(home = obj)
-    #   return HomeProfileSerializer(profile).data
-    # else:
-    #   user = Profile.objects.get(user = obj)
-    #   return ProfileSerializer(user, context={"shift_id":False}).data
+    if(obj.home):
+      profile = HomeProfile.objects.get(home = obj)
+      return HomeProfileSerializer(profile).data
+    else:
+      user = CarerProfile.objects.get(user = obj)
+      return ProfileSerializer(user, context={"shift_id":False}).data
     pass 
 # Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):
