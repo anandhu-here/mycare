@@ -70,7 +70,7 @@ def get_avail(req, *args, **kwargs):
         if av:
             return Response(AVSerializer(av).data, status=200)
         else:
-            return Response({"message":"No data found"}, status=404)
+            return Response({"message":"No data found"}, status=400)
 
     else:
         return Response({}, status=403)
