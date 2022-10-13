@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Shift
+from .models import Availability, Shift
 
 
 class ShiftSerializer(serializers.ModelSerializer):
@@ -8,4 +8,11 @@ class ShiftSerializer(serializers.ModelSerializer):
         model = Shift
         fields = "__all__"
 
-        
+
+class AVSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Availability
+        fields = "__all__"
+
+
+

@@ -3,8 +3,8 @@ from accounts.models import CarerProfile, HomeProfile
 from rest_framework import generics, permissions, views, viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
-from .serializer import ShiftSerializer
-from .models import Shift
+from .serializer import AVSerializer, ShiftSerializer
+from .models import Availability, Shift
 
 
 
@@ -58,3 +58,54 @@ def complete_shift(request, *args, **kwargs):
     else:
         return Response({"message":"Error"}, status=400)
 
+
+
+@api_view(["GET"])
+def get_avail(req, *args, **kwargs):
+    user = req.user
+    if user.carer:
+        av = Availability.objects.filter(carer__user = user).first()
+        if av:
+            return Response(AVSerializer(av).data, status=200)
+        else:
+            return Response({}, status=404)
+
+    else:
+        return Response({}, status=403)
+
+@api_view(["POST"])
+def post_avail(req, *args, **kwargs):
+    user = req.user
+    data = req.data
+    mon = data['mon']
+    tue = data['tue']
+    wed = data['wed']
+    thu = data['thu']
+    fri = data['fri']
+    sat = data['sat']
+    sun = data['sun']
+    if user.carer:
+        av = Availability.objects.filter(carer__user = user).first()
+        if av:
+            av.mon = mon
+            av.tue = tue
+            av.wed = wed 
+            av.thu=thu
+            av.fri = fri 
+            av.sat = sat 
+            av.sun = sun
+        else:
+            new_av = Availability.objects.create(carer=CarerProfile.objects.filter(user=user).first(),
+            mon=mon,
+            tue=tue,
+            wed=wed,
+            thu=thu,
+            fri=fri,
+            sat=sat,
+            sun=sun
+            )
+            new_av.save()
+            return Response(AVSerializer(new_av).data, status=200)
+    
+        return Response(AVSerializer(av).data, status=200)
+    return Response({}, status=400)

@@ -13,3 +13,17 @@ class Shift(models.Model):
     def __str__(self):
         return str(self.day) + "/" + str(self.month) + "/" + str(self.year) + ":" + str(self.home.name)
 
+
+
+class Availability(models.Model):
+    mon = models.BooleanField(default=False)
+    tue = models.BooleanField(default=False)
+    web = models.BooleanField(default=False)
+    thu = models.BooleanField(default=False)
+    fri = models.BooleanField(default=False)
+    sat = models.BooleanField(default=False)
+    sun = models.BooleanField(default=False)
+    carer = models.ForeignKey(CarerProfile, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.carer.first_name
