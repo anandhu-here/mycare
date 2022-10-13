@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
   type = serializers.SerializerMethodField()
   class Meta:
     model = User
-    fields = ('id', 'email', 'last_login', "first_login", "staff", "admin", "home", "carer", "nurse", "profile", "type", "push_token")
+    fields = ('id', 'email', 'last_login', "first_login", "staff", "admin", "home", "carer", "profile", "type", "push_token")
   def get_type(self, obj):
     if obj.home:
       return "HOME"
