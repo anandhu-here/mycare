@@ -62,16 +62,14 @@ def complete_shift(request, *args, **kwargs):
 
 @api_view(["GET"])
 def get_avail(req, *args, **kwargs):
-    print("kunna")
     user = req.user
     if user.carer:
-        print(user, "maii")
         av = Availability.objects.filter(carer__user = user).first()
         if av:
             return Response(AVSerializer(av).data, status=200)
         else:
-            return Response({"message":"No data found"}, status=400)
-
+            new_av =  Availability.objects.create(carer = CarerProfile.objects.filter(user = user).first())
+            return Response(AVSerializer(new_av).data, status=200)
     else:
         return Response({}, status=403)
 
