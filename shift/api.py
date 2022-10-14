@@ -95,6 +95,7 @@ def post_avail(req, *args, **kwargs):
             av.fri = fri 
             av.sat = sat 
             av.sun = sun
+            av.count = data['count']
             av.save()
         else:
             new_av = Availability.objects.create(carer=CarerProfile.objects.filter(user=user).first(),

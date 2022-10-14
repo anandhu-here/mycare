@@ -24,6 +24,6 @@ class Availability(models.Model):
     sat = models.BooleanField(default=False)
     sun = models.BooleanField(default=False)
     carer = models.ForeignKey(CarerProfile, on_delete=models.CASCADE)
-
+    count = models.IntegerField()
     def __str__(self):
         return self.carer.first_name
