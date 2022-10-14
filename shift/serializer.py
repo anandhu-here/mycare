@@ -10,9 +10,12 @@ class ShiftSerializer(serializers.ModelSerializer):
 
 
 class AVSerializer(serializers.ModelSerializer):
+    count = serializers.SerializerMethodField()
     class Meta:
         model = Availability
-        fields = "__all__"
+        fields = ('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun', 'carer', 'count')
 
+    def get_count(self, obj):
+        print(type(obj), "object")
 
 
