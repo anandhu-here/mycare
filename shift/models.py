@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from accounts.models import HomeProfile, CarerProfile
 # Create your models here.
@@ -8,13 +9,21 @@ class Shift(models.Model):
     day = models.IntegerField()
     month = models.IntegerField()
     year = models.IntegerField()
+    longday = models.IntegerField()
+    night = models.IntegerField()
+    late = models.IntegerField()
+    early = models.IntegerField()
     assigned = models.ManyToManyField(CarerProfile, blank=True, null=True, related_name="assigned_user")
     covered = models.ManyToManyField(CarerProfile,  blank=True, null=True)
     def __str__(self):
         return str(self.day) + "/" + str(self.month) + "/" + str(self.year) + ":" + str(self.home.name)
 
-
-
+class AssignedCarer(models.Model):
+    carer = models.ForeignKey(CarerProfile, on_delete=models.CASCADE)
+    type = models.CharField(choices=(('LONGDAY', 'LONGDAY'), ('NIGHT', 'NIGHT'), ('EARLY', 'EARLY'), ('LATE', 'LATE')))
+    shift = models.ForeignKey(Shift, on_delete=models.CASCADE)
+    covered = models.BooleanField(default=False)
+    
 class Availability(models.Model):
     mon = models.BooleanField(default=False)
     tue = models.BooleanField(default=False)

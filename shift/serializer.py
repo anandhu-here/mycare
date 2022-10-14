@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from .models import Availability, Shift
+from .models import AssignedCarer, Availability, Shift
 
 
 class ShiftSerializer(serializers.ModelSerializer):
@@ -17,3 +17,7 @@ class AVSerializer(serializers.ModelSerializer):
     
 
 
+class AssignedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AssignedCarer
+        fields = "__all__"
