@@ -13,8 +13,6 @@ class Shift(models.Model):
     night = models.IntegerField()
     late = models.IntegerField()
     early = models.IntegerField()
-    assigned = models.ManyToManyField(CarerProfile, blank=True, null=True, related_name="assigned_user")
-    covered = models.ManyToManyField(CarerProfile,  blank=True, null=True)
     def __str__(self):
         return str(self.day) + "/" + str(self.month) + "/" + str(self.year) + ":" + str(self.home.name)
 
@@ -23,6 +21,8 @@ class AssignedCarer(models.Model):
     type = models.CharField(choices=(('LONGDAY', 'LONGDAY'), ('NIGHT', 'NIGHT'), ('EARLY', 'EARLY'), ('LATE', 'LATE')), max_length=100)
     shift = models.ForeignKey(Shift, on_delete=models.CASCADE)
     covered = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.carer.first_name)
 
 class Availability(models.Model):
     mon = models.BooleanField(default=False)
