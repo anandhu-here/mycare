@@ -4,4 +4,4 @@ from shift.models import Availability, Shift
 
 # Register your models here.
 
-admin.site.register((Shift, Availability))
+admin.site.register((Shift, Availability)   )
