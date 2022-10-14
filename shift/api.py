@@ -75,6 +75,7 @@ def get_avail(req, *args, **kwargs):
 
 @api_view(["POST"])
 def post_avail(req, *args, **kwargs):
+    print(req.data, "daatttataa")
     user = req.user
     data = req.data
     mon = data['mon']
