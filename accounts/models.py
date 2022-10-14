@@ -125,7 +125,10 @@ class CarerProfile(models.Model):
 class HomeProfile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, blank=True, null=True)
+    company = models.CharField(max_length=100, blank=True, null=True)
     address = models.CharField(max_length=100, blank=True, null=True)
+    street = models.CharField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
     phone = models.CharField(max_length=13 ,blank=True, null=True)
     postcode = models.CharField(max_length=9, blank=True, null=True)
     timestamp = models.DateField(auto_now_add=True)
