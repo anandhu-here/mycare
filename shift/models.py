@@ -18,7 +18,7 @@ class Shift(models.Model):
 class Availability(models.Model):
     mon = models.BooleanField(default=False)
     tue = models.BooleanField(default=False)
-    web = models.BooleanField(default=False)
+    wed = models.BooleanField(default=False)
     thu = models.BooleanField(default=False)
     fri = models.BooleanField(default=False)
     sat = models.BooleanField(default=False)
