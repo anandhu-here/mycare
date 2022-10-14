@@ -30,7 +30,9 @@ class RegisterAPI(generics.GenericAPIView):
         user = serializer.save()
         profile = HomeProfile.objects.get(home=user)
         print(profile, "profile")
-        profile.name = data['home_name']
+        profile.company = data['company']
+        profile.address = data['address']
+        profile.city = data['city']
         profile.phone = data['phone']
         profile.address = data['address']
         profile.postcode = data['postcode']
