@@ -20,10 +20,10 @@ class Shift(models.Model):
 
 class AssignedCarer(models.Model):
     carer = models.ForeignKey(CarerProfile, on_delete=models.CASCADE)
-    type = models.CharField(choices=(('LONGDAY', 'LONGDAY'), ('NIGHT', 'NIGHT'), ('EARLY', 'EARLY'), ('LATE', 'LATE')))
+    type = models.CharField(choices=(('LONGDAY', 'LONGDAY'), ('NIGHT', 'NIGHT'), ('EARLY', 'EARLY'), ('LATE', 'LATE')), max_length=100)
     shift = models.ForeignKey(Shift, on_delete=models.CASCADE)
     covered = models.BooleanField(default=False)
-    
+
 class Availability(models.Model):
     mon = models.BooleanField(default=False)
     tue = models.BooleanField(default=False)
