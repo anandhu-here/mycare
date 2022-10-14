@@ -6,13 +6,13 @@ from accounts.models import HomeProfile, CarerProfile
 
 class Shift(models.Model):
     home = models.ForeignKey(HomeProfile, on_delete=models.CASCADE, blank=True, null=True)
-    day = models.IntegerField()
-    month = models.IntegerField()
-    year = models.IntegerField()
-    longday = models.IntegerField()
-    night = models.IntegerField()
-    late = models.IntegerField()
-    early = models.IntegerField()
+    day = models.IntegerField( blank=True, null=True )
+    month = models.IntegerField( blank=True, null=True )
+    year = models.IntegerField( blank=True, null=True )
+    longday = models.IntegerField( blank=True, null=True )
+    night = models.IntegerField( blank=True, null=True )
+    late = models.IntegerField( blank=True, null=True )
+    early = models.IntegerField( blank=True, null=True )
     def __str__(self):
         return str(self.day) + "/" + str(self.month) + "/" + str(self.year) + ":" + str(self.home.name)
 
