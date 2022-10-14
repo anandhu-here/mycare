@@ -17,7 +17,7 @@ def get_shifts(request, *args, **kwargs):
             serializer = ShiftSerializer(shift_qs, many=True)
             return Response(serializer.data, status = 200)
         elif user.is_home:
-            shift_qs = Shift.objects.filter(home=user)
+            shift_qs = Shift.objects.filter(home__user=user)
             serializer = ShiftSerializer(shift_qs, many=True)
             return Response(serializer.data, status = 200)
     return Response({"message":"Error"}, status = 400)
