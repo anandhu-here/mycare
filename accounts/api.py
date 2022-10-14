@@ -23,12 +23,12 @@ class RegisterAPI(generics.GenericAPIView):
       "password":password,
       "push_token":push_token
     }, context={'type':data['type']})
+    print(serializer.is_valid(), "0-00000")
     if serializer.is_valid(raise_exception=True):
 
       if type == "HOME":
         user = serializer.save()
         profile = HomeProfile.objects.get(home=user)
-        print(profile, 'rpofile')
         profile.name = data['home_name']
         profile.phone = data['phone']
         profile.address = data['address']
@@ -72,7 +72,7 @@ class LoginAPI(generics.GenericAPIView):
 @api_view(["GET"])
 @permission_classes([permissions.IsAuthenticated])
 def UserAPI(request, *args, **kwargs):
-
+  
   user = request.user
   serializer = UserSerializer(user)
   _, token = AuthToken.objects.create(user)
