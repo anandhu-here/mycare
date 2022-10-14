@@ -16,7 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
       return "CARER"
   def get_profile(self, obj):
     if(obj.home):
-      profile = HomeProfile.objects.get(home = obj)
+      profile = HomeProfile.objects.get(user = obj)
       return HomeProfileSerializer(profile).data
     else:
       user = CarerProfile.objects.get(user = obj)
