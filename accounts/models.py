@@ -138,6 +138,7 @@ class HomeProfile(models.Model):
 
 def user_did_save(sender, instance, created, *args, **kwargs):
     if created:
+        print(instance.is_home, instance.is_carer, "oopp")
         if instance.is_home:
             HomeProfile.objects.get_or_create(home=instance)
         if instance.is_carer:

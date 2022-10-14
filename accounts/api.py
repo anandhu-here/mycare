@@ -29,6 +29,7 @@ class RegisterAPI(generics.GenericAPIView):
       if type == "HOME":
         user = serializer.save()
         profile = HomeProfile.objects.get(home=user)
+        print(profile, "profile")
         profile.name = data['home_name']
         profile.phone = data['phone']
         profile.address = data['address']
