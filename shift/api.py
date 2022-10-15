@@ -27,11 +27,9 @@ def get_shifts(request, *args, **kwargs):
 @api_view(["POST"])
 def publish_shifts(request, *args, **kwargs):
     user = request.user
-    data = request.data
-    home = HomeProfile.objects.filter(id=data['home_id']).first()
-    shifts = data['shifts']
-    shift_ls = [Shift(home=home, day=shift["day"], month=shift["month"],longday=shift["longday"],night=shift["night"], late=shift["late"], early=shift["early"], year=shift["year"]) for shift in shifts]
-    shift_qs = Shift.objects.bulk_create(shift_ls)
+    shift = request.data
+    home = HomeProfile.objects.filter(id=shift['HOME_ID']).first()
+    shift_qs = Shift.objects.create(home=home, day=shift["DAY"], month=shift["MONTH"],longday=shift["LONGDAY"],night=shift["night"], late=shift["LATE"], early=shift["EARLY"], year=shift["YEAR"])
     ser = ShiftSerializer(shift_qs, many=True)
     return Response(ser.data, status = 200)
 
