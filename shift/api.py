@@ -29,7 +29,7 @@ def publish_shifts(request, *args, **kwargs):
     user = request.user
     shift = request.data
     home = HomeProfile.objects.filter(id=shift['HOME_ID']).first()
-    shift_qs = Shift.objects.create(home=home, day=shift["DAY"], month=shift["MONTH"],longday=shift["LONGDAY"],night=shift["night"], late=shift["LATE"], early=shift["EARLY"], year=shift["YEAR"])
+    shift_qs = Shift.objects.create(home=home, day=shift["DAY"], month=shift["MONTH"],longday=shift["LONGDAY"],night=shift["NIGHT"], late=shift["LATE"], early=shift["EARLY"], year=shift["YEAR"])
     ser = ShiftSerializer(shift_qs, many=True)
     return Response(ser.data, status = 200)
 
